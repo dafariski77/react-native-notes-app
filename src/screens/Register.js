@@ -14,24 +14,26 @@ const Register = ({ navigation }) => {
   const [name, setName] = useState("");
   const [uname, setUsername] = useState("");
   const [pass, setPassword] = useState("");
+  const [confPass, setConfPassword] = useState("");
 
-  const register = (name, username, password) => {
+  const register = (name, username, password, confirmPassword) => {
     const requestingData = {
       name,
       username,
       password,
+      confirmPassword,
     };
 
     if (!name || !username || !password) {
       alert("Please fill a data!");
     } else {
       axios
-        .post("https://mynotesapi78.herokuapp.com/register", requestingData)
+        .post(`https://witty-moth-fez.cyclic.app/register`, requestingData)
         .then((response) => {
           alert("User registered!");
           navigation.navigate("Login");
         })
-        .catch((error) => alert("Username already exist!"));
+        .catch((error) => alert(error.message));
     }
   };
 
@@ -40,6 +42,7 @@ const Register = ({ navigation }) => {
       setName("");
       setUsername("");
       setPassword("");
+      setConfPassword("");
     });
     return unsubcribe;
   }, [navigation]);
@@ -50,7 +53,10 @@ const Register = ({ navigation }) => {
         <Text style={styles.title}>Register</Text>
         <Text style={styles.subtitle}>
           Please input your data or
-          <Text style={styles.link} onPress={() => navigation.navigate("Login")}>
+          <Text
+            style={styles.link}
+            onPress={() => navigation.navigate("Login")}
+          >
             {" "}
             Login
           </Text>
@@ -84,10 +90,20 @@ const Register = ({ navigation }) => {
           onChangeText={(password) => setPassword(password)}
         />
       </View>
+      <View style={styles.inputView}>
+        <TextInput
+          value={confPass}
+          style={styles.TextInput}
+          placeholder="Confirm Password"
+          placeholderTextColor="grey"
+          secureTextEntry={true}
+          onChangeText={(confPassword) => setConfPassword(confPassword)}
+        />
+      </View>
       <TouchableOpacity
         style={styles.loginBtn}
         onPress={() => {
-          register(name, uname, pass);
+          register(name, uname, pass, confPass);
         }}
       >
         <Text style={styles.loginText}>Register</Text>

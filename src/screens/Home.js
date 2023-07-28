@@ -21,8 +21,8 @@ const Home = ({ navigation, route }) => {
   const getNote = () => {
     setSpinner(true);
 
-    axios.get(`https://mynotesapi78.herokuapp.com/${author}`).then((response) => {
-      setData(response.data.notes);
+    axios.get(`https://witty-moth-fez.cyclic.app/notes/${author}`).then((response) => {
+      setData(response.data.data);
       setSpinner(false);
     });
   };
@@ -44,6 +44,14 @@ const Home = ({ navigation, route }) => {
         }}
       >
         <Text style={{ fontSize: 45, color: "#222831" }}>+</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.mapBtn}
+        onPress={() => {
+          navigation.navigate("Map");
+        }}
+      >
+        <Text style={{ fontSize: 45, color: "#222831" }}>M</Text>
       </TouchableOpacity>
       {data.length <= 0 ? (
         <Nothing />
@@ -117,6 +125,19 @@ const styles = StyleSheet.create({
     borderRadius: 65 / 2,
     position: "absolute",
     bottom: 20,
+    right: 20,
+    zIndex: 1,
+  },
+  mapBtn: {
+    backgroundColor: "#ffd369",
+    height: 65,
+    width: 65,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    borderRadius: 65 / 2,
+    position: "absolute",
+    bottom: 100,
     right: 20,
     zIndex: 1,
   },

@@ -8,6 +8,7 @@ import Home from "./src/screens/Home";
 import Login from "./src/screens/Login";
 import Edit from "./src/screens/Edit";
 import Register from "./src/screens/Register";
+import Map from "./src/screens/Map";
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +57,16 @@ export default function App() {
               </TouchableHighlight>
             ),
           })}
+        />
+        <Stack.Screen
+          name="Map"
+          component={Map}
+          options={{
+            headerStyle: {
+              backgroundColor: "#111111",
+            },
+            headerTintColor: "#eeeeee",
+          }}
         />
         <Stack.Screen
           name="Add"

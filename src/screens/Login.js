@@ -23,17 +23,17 @@ const Login = ({ navigation }) => {
     };
     setSpinner(true);
     axios
-      .post("https://mynotesapi78.herokuapp.com/login", requestingData)
+      .post(`https://witty-moth-fez.cyclic.app/login`, requestingData)
       .then((response) => {
-        const data = response.data.users;
-        const { _id, name, password, username } = data;
+        const data = response.data.data;
+        const { name, username } = data;
         setSpinner(false);
         alert("Login success!");
         navigation.navigate("Home", { name, username });
       })
       .catch((error) => {
         setSpinner(false);
-        alert("Invalid username or password");
+        alert(error.message);
       });
   };
 
@@ -57,7 +57,10 @@ const Login = ({ navigation }) => {
         <Text style={styles.title}>MyNotes</Text>
         <Text style={styles.subtitle}>
           You need to login first or
-          <Text style={styles.link} onPress={() => navigation.navigate("Register")}>
+          <Text
+            style={styles.link}
+            onPress={() => navigation.navigate("Register")}
+          >
             {" "}
             Register
           </Text>

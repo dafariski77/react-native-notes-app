@@ -8,7 +8,7 @@ export const saveNote = (title, note, author) => {
   };
 
   axios
-    .post("https://mynotesapi78.herokuapp.com/", requestingData)
+    .post(`https://witty-moth-fez.cyclic.app/notes`, requestingData)
     .then((response) => {
       alert("Note saved!");
     })
@@ -23,7 +23,7 @@ export const editNote = (id, title, note, author) => {
   };
 
   axios
-    .patch(`https://mynotesapi78.herokuapp.com/${id}`, requestingData)
+    .put(`https://witty-moth-fez.cyclic.app/notes/${id}`, requestingData)
     .then((response) => {
       alert("Note updated");
     })
@@ -32,7 +32,7 @@ export const editNote = (id, title, note, author) => {
 
 export const deleteNote = (id) => {
   axios
-    .delete(`https://mynotesapi78.herokuapp.com/${id}`)
+    .delete(`https://witty-moth-fez.cyclic.app/notes/${id}`)
     .then((response) => alert("Note deleted!"))
     .catch((error) => alert(error));
 };
